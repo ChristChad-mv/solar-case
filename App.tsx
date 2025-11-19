@@ -53,22 +53,23 @@ export default function App() {
       </div>
 
       {/* Header */}
-      <div className="absolute top-0 left-0 w-full p-6 z-10 flex justify-between items-start pointer-events-none">
+      <div className="absolute top-0 left-0 w-full p-3 sm:p-6 z-10 flex justify-between items-start pointer-events-none">
         <div>
-          <h1 className="text-3xl font-bold tracking-tighter flex items-center gap-3 text-gray-900">
-             <Box className="text-blue-600" /> SolarCase<span className="text-gray-500"></span>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter flex items-center gap-2 sm:gap-3 text-gray-900">
+             <Box className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" /> SolarCase
           </h1>
-          <p className="text-sm text-gray-600 mt-1">Visualisation d'Assemblage Prototype v1.0</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1 hidden sm:block">Visualisation d'Assemblage Prototype v1.0</p>
         </div>
         
-        <div className="pointer-events-auto flex gap-3">
+        <div className="pointer-events-auto flex gap-2 sm:gap-3">
           {/* Model Switcher */}
           <button
             onClick={toggleModel}
-            className="bg-white/60 hover:bg-white/80 backdrop-blur-md border border-white/40 text-gray-800 px-4 py-2 rounded-full flex items-center gap-2 transition text-sm font-medium shadow-sm"
+            className="bg-white/60 hover:bg-white/80 backdrop-blur-md border border-white/40 text-gray-800 px-3 sm:px-4 py-2 rounded-full flex items-center gap-1 sm:gap-2 transition text-xs sm:text-sm font-medium shadow-sm"
           >
-            <Smartphone className="w-4 h-4" />
-            {phoneModel === 'iPhone12' ? 'iPhone 12' : 'Galaxy S22'}
+            <Smartphone className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden xs:inline">{phoneModel === 'iPhone12' ? 'iPhone 12' : 'Galaxy S22'}</span>
+            <span className="xs:hidden">{phoneModel === 'iPhone12' ? 'iPhone' : 'Galaxy'}</span>
           </button>
 
           
@@ -79,8 +80,8 @@ export default function App() {
       <AITools isOpen={aiPanelOpen} onClose={() => setAiPanelOpen(false)} />
 
       {/* Current Part Label Overlay */}
-      <div className="absolute top-32 left-6 z-10 pointer-events-none">
-         <div className="flex flex-col gap-6">
+      <div className="absolute top-24 sm:top-32 left-3 sm:left-6 right-3 sm:right-auto z-10 pointer-events-none">
+         <div className="flex flex-col gap-4 sm:gap-6">
             {Object.keys(stepsInfo).map((key) => {
                 const s = parseInt(key);
                 const isActive = s === step;
@@ -88,13 +89,13 @@ export default function App() {
                 return (
                     <div 
                         key={key} 
-                        className={`transition-all duration-500 transform ${isActive ? 'translate-x-4 opacity-100' : isPast ? 'opacity-40' : 'opacity-0 -translate-x-4'} `}
+                        className={`transition-all duration-500 transform ${isActive ? 'translate-x-2 sm:translate-x-4 opacity-100' : isPast ? 'opacity-40' : 'opacity-0 -translate-x-4'} `}
                     >
                         {isActive && (
-                            <div className="bg-white/70 backdrop-blur-xl border-l-4 border-blue-600 p-5 rounded-r-xl max-w-sm shadow-xl">
+                            <div className="bg-white/70 backdrop-blur-xl border-l-4 border-blue-600 p-3 sm:p-5 rounded-r-xl max-w-xs sm:max-w-sm shadow-xl">
                                 <span className="text-xs text-blue-600 font-bold tracking-wider mb-1 block">PARTIE 0{s + 1}</span>
-                                <h3 className="text-xl font-bold leading-tight text-gray-900 mb-2">{stepsInfo[s as AssemblyStep].label}</h3>
-                                <p className="text-sm text-gray-700 leading-relaxed">
+                                <h3 className="text-base sm:text-xl font-bold leading-tight text-gray-900 mb-1 sm:mb-2">{stepsInfo[s as AssemblyStep].label}</h3>
+                                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                                   {stepsInfo[s as AssemblyStep].description}
                                 </p>
                             </div>
@@ -106,26 +107,31 @@ export default function App() {
       </div>
 
       {/* Bottom Controls */}
-      <div className="absolute bottom-0 left-0 w-full p-8 z-10 flex justify-center items-end gap-4 pointer-events-none">
-        <div className="pointer-events-auto flex gap-4 bg-white/60 backdrop-blur-xl p-2 rounded-2xl border border-white/40 shadow-2xl">
+      <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 z-10 flex justify-center items-end gap-2 sm:gap-4 pointer-events-none">
+        <div className="pointer-events-auto flex gap-2 sm:gap-4 bg-white/60 backdrop-blur-xl p-2 rounded-2xl border border-white/40 shadow-2xl">
             <button 
                 onClick={reset}
-                className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/40 hover:bg-white/60 text-gray-600 hover:text-gray-900 transition shadow-sm"
+                className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-white/40 hover:bg-white/60 text-gray-600 hover:text-gray-900 transition shadow-sm"
                 title="Réinitialiser"
             >
-                <RotateCcw className="w-5 h-5" />
+                <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             
             <button 
                 onClick={nextStep}
                 disabled={step === AssemblyStep.ThermalInsert}
-                className={`h-12 px-8 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg ${step === AssemblyStep.ThermalInsert ? 'bg-green-600 text-white cursor-default' : 'bg-blue-600 hover:bg-blue-500 text-white hover:scale-105 active:scale-95 shadow-blue-500/30'}`}
+                className={`h-10 sm:h-12 px-4 sm:px-8 rounded-xl font-bold flex items-center gap-1 sm:gap-2 transition-all shadow-lg text-sm sm:text-base ${step === AssemblyStep.ThermalInsert ? 'bg-green-600 text-white cursor-default' : 'bg-blue-600 hover:bg-blue-500 text-white hover:scale-105 active:scale-95 shadow-blue-500/30'}`}
             >
                 {step === AssemblyStep.ThermalInsert ? (
-                    "Assemblage Terminé"
+                    <>
+                      <span className="hidden xs:inline">Assemblage Terminé</span>
+                      <span className="xs:hidden">Terminé</span>
+                    </>
                 ) : (
                     <>
-                      Étape Suivante <ChevronRight className="w-4 h-4" />
+                      <span className="hidden xs:inline">Étape Suivante</span>
+                      <span className="xs:hidden">Suivant</span>
+                      <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     </>
                 )}
             </button>
