@@ -56,7 +56,7 @@ export default function App() {
       <div className="absolute top-0 left-0 w-full p-6 z-10 flex justify-between items-start pointer-events-none">
         <div>
           <h1 className="text-3xl font-bold tracking-tighter flex items-center gap-3 text-gray-900">
-             <Box className="text-blue-600" /> SolarFrame<span className="text-gray-500">Pro</span>
+             <Box className="text-blue-600" /> SolarCase<span className="text-gray-500"></span>
           </h1>
           <p className="text-sm text-gray-600 mt-1">Visualisation d'Assemblage Prototype v1.0</p>
         </div>
