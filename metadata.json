@@ -1,0 +1,8 @@
+{
+  "name": "SolarFrame Pro",
+  "description": "A professional 3D visualization tool for solar phone case assembly, integrated with Gemini AI for generation, editing, and analysis.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
